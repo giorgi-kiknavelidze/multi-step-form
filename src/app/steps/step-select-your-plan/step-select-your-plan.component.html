@@ -1,0 +1,80 @@
+<form
+  class="font-ubuntu flex flex-col gap-5 px-4 w-full h-full"
+  [formGroup]="formGroup"
+  (ngSubmit)="onSubmit()"
+>
+  <div class="flex flex-col gap-2">
+    <h1 class="text-primary-marine text-2xl font-bold">Select your plan</h1>
+    <p class="text-neutral-cool">
+      You have the option of monthly or yearly billing.
+    </p>
+  </div>
+  <div class="flex flex-col justify-center gap-4">
+    <div class="w-full flex flex-col md:flex-row justify-center gap-2">
+      <app-selectable-with-icon
+        icon="assets/icon-arcade.svg"
+        title="Arcade"
+        [price]="
+          priceService.getPriceForUI({
+            plan: Plan.Arcade,
+            yearly: !!this.formGroup.value.yearly
+          })
+        "
+        [additionalText]="this.formGroup.value.yearly ? '2 months free' : ''"
+        [value]="this.formGroup.value.plan === 'Arcade'"
+        (click)="onArcadeClick()"
+      ></app-selectable-with-icon>
+      <app-selectable-with-icon
+        icon="assets/icon-advanced.svg"
+        title="Advanced"
+        [price]="
+          priceService.getPriceForUI({
+            plan: Plan.Advanced,
+            yearly: !!this.formGroup.value.yearly
+          })
+        "
+        [additionalText]="this.formGroup.value.yearly ? '2 months free' : ''"
+        [value]="this.formGroup.value.plan === 'Advanced'"
+        (click)="onAdvancedClick()"
+      ></app-selectable-with-icon>
+      <app-selectable-with-icon
+        icon="assets/icon-pro.svg"
+        title="Pro"
+        [price]="
+          priceService.getPriceForUI({
+            plan: Plan.Pro,
+            yearly: !!this.formGroup.value.yearly
+          })
+        "
+        [additionalText]="this.formGroup.value.yearly ? '2 months free' : ''"
+        [value]="this.formGroup.value.plan === 'Pro'"
+        (click)="onProClick()"
+      ></app-selectable-with-icon>
+    </div>
+    <div class="w-full flex justify-center items-center gap-4">
+      <button
+        appButton
+        [variant]="this.formGroup.value.yearly ? 'plain' : 'plainActive'"
+        (click)="onMonthlyClick()"
+      >
+        Monthly
+      </button>
+      <app-switch formControlName="yearly"></app-switch>
+      <button
+        appButton
+        [variant]="!this.formGroup.value.yearly ? 'plain' : 'plainActive'"
+        (click)="onYearlyClick()"
+      >
+        Yearly
+      </button>
+    </div>
+  </div>
+  <div
+    class="absolute bottom-0 left-0 right-0 lg:static flex justify-between items-end grow bg-white p-4"
+  >
+    <button appButton variant="plain" type="button" (click)="onBackClick()">
+      Go Back
+    </button>
+    <button appButton variant="primary" type="submit">Next Step</button>
+  </div>
+</form>

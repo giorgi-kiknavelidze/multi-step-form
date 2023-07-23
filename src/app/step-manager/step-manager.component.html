@@ -1,0 +1,45 @@
+<div
+  class="w-full min-h-screen flex flex-col lg:flex-row items-center lg:justify-center bg-image"
+>
+  <div class="w-full lg:hidden py-8">
+    <app-sidebar-mobile
+      [currentStep]="getCurrentStepForSidebar()"
+    ></app-sidebar-mobile>
+  </div>
+  <div
+    class="flex items-center justify-center rounded-lg bg-white p-6 w-[90%] max-w-max lg:w-auto lg:p-0"
+  >
+    <div class="hidden lg:block">
+      <app-sidebar-desktop
+        [currentStep]="getCurrentStepForSidebar()"
+      ></app-sidebar-desktop>
+    </div>
+    <div class="flex flex-col items-center w-[590px]">
+      <app-step-personal-info
+        *ngIf="currentStep === 0"
+        [defaultValue]="personalInfo"
+        (handleSubmit)="onPersonalInputSubmit($event)"
+      ></app-step-personal-info>
+      <app-step-select-your-plan
+        *ngIf="currentStep === 1"
+        [defaultValue]="planSelection"
+        (back)="onSelectYourPlanBackClick($event)"
+        (handleSubmit)="onSelectYourPlanSubmit($event)"
+      ></app-step-select-your-plan>
+      <app-step-pick-addons
+        *ngIf="currentStep === 2"
+        [defaultValue]="planSelection"
+        (back)="onPickAddonsBackClick($event)"
+        (handleSubmit)="onPickAddonsSubmit($event)"
+      ></app-step-pick-addons>
+      <app-step-finishing-up
+        *ngIf="currentStep === 3"
+        [planSelection]="planSelection"
+        (changeClick)="onChangeClick()"
+        (back)="onBackClick()"
+        (handleSubmit)="onFinishingUpSubmit()"
+      ></app-step-finishing-up>
+      <app-step-thank-you *ngIf="currentStep === 4"></app-step-thank-you>
+    </div>
+  </div>
+</div>

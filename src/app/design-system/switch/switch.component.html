@@ -1,0 +1,14 @@
+<button
+  class="flex items-center rounded-full w-[50px] h-6 justify-center gap-2 bg-primary-marine"
+  type="button"
+  (click)="toggle()"
+>
+  <div
+    class="w-4 h-4 bg-white rounded-full"
+    [ngClass]="{ invisible: value }"
+  ></div>
+  <div
+    class="w-4 h-4 bg-white rounded-full"
+    [ngClass]="{ invisible: !value }"
+  ></div>
+</button>

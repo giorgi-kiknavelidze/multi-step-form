@@ -1,0 +1,17 @@
+<div class="font-bold w-[274px] h-[568px] bg-image relative">
+  <div class="absolute left-[30px] top-[40px] flex flex-col gap-8">
+    <div
+      class="flex items-center gap-4"
+      *ngFor="let stepName of steps; index as i"
+    >
+      <app-step-number-display
+        [active]="i === currentStep"
+        [value]="i + 1"
+      ></app-step-number-display>
+      <div class="flex flex-col text-sm">
+        <span class="font-light text-primary-pastel">STEP {{ i + 1 }}</span>
+        <span class="text-white">{{ stepName }}</span>
+      </div>
+    </div>
+  </div>
+</div>

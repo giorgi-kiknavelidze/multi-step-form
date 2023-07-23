@@ -1,0 +1,17 @@
+<div
+  [ngClass]="{
+    'flex rounded-md items-center justify-between border-[1px] cursor-pointer p-4': true,
+    'border-neutral-cool': !value,
+    'border-primary-purplish': value
+  }"
+  (click)="toggle()"
+>
+  <div class="flex items-center gap-4">
+    <app-checkbox [value]="value"></app-checkbox>
+    <div class="flex flex-col gap-2">
+      <span class="text-primary-marine font-bold">{{ addonName }}</span>
+      <span class="text-sm text-neutral-cool">{{ description }}</span>
+    </div>
+  </div>
+  <span class="text-primary-marine">{{ price }}</span>
+</div>

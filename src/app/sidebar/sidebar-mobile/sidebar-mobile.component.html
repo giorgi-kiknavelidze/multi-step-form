@@ -1,0 +1,8 @@
+<div class="flex w-full items-center justify-center gap-4 px-4">
+  <div class="flex items-center gap-4" *ngFor="let stepNumber of steps">
+    <app-step-number-display
+      [active]="stepNumber === currentStep"
+      [value]="stepNumber + 1"
+    ></app-step-number-display>
+  </div>
+</div>

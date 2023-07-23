@@ -1,0 +1,55 @@
+<form
+  class="font-ubuntu flex flex-col gap-5 px-4 w-full h-full"
+  [formGroup]="formGroup"
+  (ngSubmit)="onSubmit()"
+>
+  <div class="flex flex-col gap-2">
+    <h1 class="text-primary-marine text-2xl font-bold">Select your plan</h1>
+    <p class="text-neutral-cool">
+      You have the option of monthly or yearly billing.
+    </p>
+  </div>
+  <div class="flex flex-col justify-center gap-4">
+    <app-addon-selectable
+      addonName="Online service"
+      description="Access to multiplayer games"
+      [price]="
+        priceService.getPriceForUI({
+          onlineService: true,
+          yearly: !!defaultValue?.yearly
+        })
+      "
+      formControlName="onlineService"
+    ></app-addon-selectable>
+    <app-addon-selectable
+      addonName="Larger storage"
+      description="Extra 1 TB of cloud"
+      [price]="
+        priceService.getPriceForUI({
+          largerStorage: true,
+          yearly: !!defaultValue?.yearly,
+        })
+      "
+      formControlName="largerStorage"
+    ></app-addon-selectable>
+    <app-addon-selectable
+      addonName="Customizable profile"
+      description="Extra 1 TB of cloud"
+      [price]="
+        priceService.getPriceForUI({
+          customizableProfile: true,
+          yearly: !!defaultValue?.yearly
+        })
+      "
+      formControlName="customizableProfile"
+    ></app-addon-selectable>
+  </div>
+  <div
+    class="absolute bottom-0 left-0 right-0 lg:static flex justify-between items-end grow bg-white p-4"
+  >
+    <button appButton variant="plain" type="button" (click)="onBackClick()">
+      Go Back
+    </button>
+    <button appButton variant="primary" type="submit">Next Step</button>
+  </div>
+</form>

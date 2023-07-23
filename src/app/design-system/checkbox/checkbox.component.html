@@ -1,0 +1,12 @@
+<button
+  class="rounded-md w-5 h-5 border-2 border-2-neutral-cool flex items-center justify-center"
+  *ngIf="!value"
+  (click)="handleOnClick()"
+></button>
+<button
+  class="rounded-md w-5 h-5 border-2 border-2-primary-purplish flex items-center justify-center bg-primary-purplish"
+  *ngIf="value"
+  (click)="handleOnClick()"
+>
+  <img src="assets/icon-checkmark.svg" alt="" />
+</button>

@@ -1,0 +1,76 @@
+<form
+  class="font-ubuntu flex flex-col gap-5 px-4 w-full h-full"
+  (ngSubmit)="onSubmit()"
+>
+  <div class="flex flex-col gap-2">
+    <h1 class="text-primary-marine text-2xl font-bold">Finishing Up</h1>
+    <p class="text-neutral-cool">
+      Double-check everything is OK before confirming.
+    </p>
+  </div>
+  <div class="flex flex-col justify-center items-center gap-4 p-4">
+    <div class="w-full flex justify-between items-center">
+      <div class="flex flex-col items-start">
+        <span class="text-lg text-primary-marine font-bold">
+          {{ planSelection.plan }} ({{
+            planSelection.yearly ? 'Yearly' : 'Monthly'
+          }})
+        </span>
+        <button
+          class="text-neutral-cool underline active:text-primary-purplish"
+          (click)="onChangeClick()"
+          type="button"
+        >
+          Change
+        </button>
+      </div>
+      <span class="text-primary-marine font-bold">
+        {{ priceService.getPriceForUI({ plan: planSelection.plan }) }}
+      </span>
+    </div>
+    <hr class="border-b-neutral-light border-b-[1px] w-full my-4" />
+    <div
+      class="flex justify-between w-full"
+      *ngIf="planSelection.onlineService"
+    >
+      <span class="text-neutral-cool">Online Service</span>
+      <span class="text-primary-marine">{{
+        priceService.getPriceForUI({ onlineService: true }, true)
+      }}</span>
+    </div>
+    <div
+      class="flex justify-between w-full"
+      *ngIf="planSelection.largerStorage"
+    >
+      <span class="text-neutral-cool">Larger storage</span>
+      <span class="text-primary-marine">{{
+        priceService.getPriceForUI({ largerStorage: true }, true)
+      }}</span>
+    </div>
+    <div
+      class="flex justify-between w-full"
+      *ngIf="planSelection.customizableProfile"
+    >
+      <span class="text-neutral-cool">Customizable Profile</span>
+      <span class="text-primary-marine">{{
+        priceService.getPriceForUI({ customizableProfile: true }, true)
+      }}</span>
+    </div>
+    <div class="flex justify-between w-full">
+      <span class="text-neutral-cool"
+        >Total ({{ planSelection.yearly ? 'Yearly' : 'Monthly' }})</span
+      >
+      <span class="text-primary-purplish text-lg">{{
+        priceService.getPriceForUI(planSelection, false)
+      }}</span>
+    </div>
+  </div>
+  <div
+    class="absolute bottom-0 left-0 right-0 lg:static flex justify-between items-end grow bg-white p-4"
+  >
+    <button appButton variant="plain" type="button" (click)="onBackClick()">
+      Go Back
+    </button>
+    <button appButton variant="submit" type="submit">Confirm</button>
+  </div>
+</form>
